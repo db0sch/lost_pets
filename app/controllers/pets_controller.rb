@@ -11,12 +11,15 @@ class PetsController < ApplicationController
 
   def new
     @pet = Pet.new
-  end
+  end # render new.html.erb
 
   def create
     @pet = Pet.new(pet_params)
-    @pet.save
-    redirect_to pet_path(@pet)
+    if @pet.save
+      redirect_to pet_path(@pet)
+    else
+      render :new # render "new.html.erb"
+    end
   end
 
   # GET /pets/:id/edit {id: 42}
